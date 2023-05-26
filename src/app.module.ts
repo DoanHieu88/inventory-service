@@ -14,6 +14,7 @@ import { DetailBillModule } from './module/detailBill/detailBill.module';
 import { BlogModule } from './module/blog/blog.module';
 import { CategoryModule } from './module/product-category/category.module';
 import { ContactModule } from './module/contact/contact.module';
+import { User } from './entity/user.entity';
 
 @Module({
   imports: [

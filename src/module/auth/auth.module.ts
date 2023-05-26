@@ -1,6 +1,5 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserRepository } from 'src/repository/users.repository';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { PassportModule } from '@nestjs/passport';
@@ -8,10 +7,11 @@ import { JwtModule } from '@nestjs/jwt';
 import { CustomerRepository } from 'src/repository/customer.repository';
 import { JwtStrategy } from './jwt.strategy';
 import { AuthGuard } from './auth.guard';
+import { User } from 'src/entity/user.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([UserRepository, CustomerRepository]),
+    TypeOrmModule.forFeature([User, CustomerRepository]),
     forwardRef(() => AuthModule),
     PassportModule,
     JwtModule.register({

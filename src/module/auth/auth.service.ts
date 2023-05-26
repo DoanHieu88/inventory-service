@@ -14,17 +14,19 @@ import {
 } from 'src/common/constant/exception-constant';
 import { AuthType } from 'src/common/enum';
 import { hashPassword } from 'src/common/until/funtion-until';
-import { UserRepository } from 'src/repository/users.repository';
 import { Login, SignUpDTO } from './auth.dto';
 import * as bcryptjs from 'bcryptjs';
 import { User } from 'src/entity/user.entity';
 import { JwtService } from '@nestjs/jwt';
 import { CustomerRepository } from 'src/repository/customer.repository';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private userRepository: UserRepository,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
     private customerRepository: CustomerRepository,
     private readonly jwtService: JwtService,
   ) {}

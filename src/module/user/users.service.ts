@@ -3,17 +3,21 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
-
-import { UserRepository } from 'src/repository/users.repository';
 import { AuthService } from '../auth/auth.service';
 // import { UpdateUserDto } from './users.dto';
 import { USER_NOT_FOUND } from 'src/common/constant/exception-constant';
 import { changeInforUserDto, ForgotPasswordDto } from './users.dto';
 import { hashPassword } from 'src/common/until/funtion-until';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/entity/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+  ) {}
 
   public async getAllUser() {
     try {
